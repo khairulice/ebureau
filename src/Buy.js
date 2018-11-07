@@ -12,90 +12,78 @@ export default class Buy extends Component {
             currencyies: [{ name: 'USD' }, { name: 'Canadian Dollar' }],
             selectedCurrency: '',
             amount: 0.0,
-            submitted: false,
-            confirmation: false
+            proceed: true,
+            review: false,
+            acknowledge: false
         };
     }
 
     validateForm() {
         return this.state.selectedCurrency.length > 0;
     }
-    handleChange = event => {        
+
+    handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
         });
     }
-    
-  onCurrencySelect(e){
-    console.log('[onPickColor]', this.inputEl.value )
-    this.setState({ selectedCurrency: this.inputEl.value });
-  }
 
-  onPickColor(e){
-    console.log('[onPickColor]', this.inputEl.value )
-    this.setState({ color: this.inputEl.value });
-  }
+    onCurrencySelect(e) {
+        console.log('[onPickColor]', this.inputEl.value)
+        this.setState({ selectedCurrency: this.inputEl.value });
+    }
 
-
-    handleContinue = event => {
+    handleProceed = event => {
         event.preventDefault();
-        this.setState(prevState => ({ ...prevState, submitted: true, confirmation: true }))
-
+        this.setState({ proceed: false, review: true });
     }
 
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({ submitted: true });
+        this.setState({ proceed: false, review: false });
         const { selectedCurrency, amount } = this.state;
         const { user } = this.props;
+        console.log(user);
         if (selectedCurrency && amount) {
             let dt = new Date();
-            let fb = firebase.database().ref('ClientTransaction');
+            let fb = firebase.database().ref('TradeTransaction');
             fb.push({
                 currency_code: selectedCurrency,
+                amount: -amount,
+                client_id: 'khairulice@gmail.com',
+                dt_created: dt.toString()
+            });
+
+            let fbc = firebase.database().ref('ClientTransaction');
+            fbc.push({
+                currency_code: selectedCurrency,
                 amount: amount,
-                client_id: user.id,
+                client_id: 'CurrencyExchanger',
                 dt_created: dt.toString()
             });
         }
-
+        this.setState({ proceed: false, review: false, acknowledge: true });
     }
     render() {
 
         let options = this.state.currencyies.map(c => {
-            return <option value={c}>{c.name}</option>
-        })
+            return <option key={c.key} value={c.name}>{c.name}</option>
+        });
 
-        return (<div className="Signup col-md-offset-3 col-md-6 col-sm-12 topmargin">
-            {/* <form onSubmit={this.handleContinue}> */}
-                {!this.state.submitted &&
+        return (<div className="col-md-offset-4 col-md-3 col-sm-12 topmargin">
+            <form onSubmit={this.handleSubmit}>
+                {this.state.proceed &&
                     <span>
-                        <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select</ControlLabel>
-          <FormControl 
-              onChange={this.onPickColor.bind(this)}
-              inputRef={ el => this.inputEl=el }
-              componentClass="select" placeholder="select">
-            <option value="">select</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-          </FormControl>
-        </FormGroup>
-
                         <FormGroup controlId="selectedCurrency">
                             <ControlLabel>Select currency</ControlLabel>
                             <FormControl componentClass="select" placeholder="select" onChange={this.onCurrencySelect.bind(this)}
-                                inputRef={ el => this.inputEl=el }
-                                >
+                                inputRef={el => this.inputEl = el}>
                                 <option value="select" >select</option>
                                 {options}
                             </FormControl>
                         </FormGroup>
-
                         <FormGroup
-                            controlId="amount"
-                        >
+                            controlId="amount">
                             <ControlLabel>Amount</ControlLabel>
                             <FormControl
                                 type="text"
@@ -103,46 +91,48 @@ export default class Buy extends Component {
                                 placeholder="Enter amount"
                                 onChange={this.handleChange}
                             />
+                            <ControlLabel>= {this.state.amount/83} USD</ControlLabel>
                         </FormGroup>
-
                         <Button
                             block
                             bsSize="large"
+                            className="primary"
                             disabled={!this.validateForm()}
-                            type="submit"
-                        >
-                            Buy
-          </Button>
+                            onClick={this.handleProceed}
+                            type="submit">
+                            Proceed
+                        </Button>
                     </span>
                 }
-
-                {this.state.confirmation &&
+                {this.state.review &&
                     <div>
                         <div>Currency: {this.state.selectedCurrency}</div>
                         <div>Amount: {this.state.amount}</div>
                         <Button
                             block
                             bsSize="large"
-                            type="submit"
-                            onSubmit={this.handleSubmit}
-                        >
-                            Confirm
-             </Button>
+                            className="primary"
+                            type="submit">
+                            Buy
+                        </Button>
                     </div>
                 }
-
-            {/* </form> */}
+            </form>
+            {this.state.acknowledge &&
+                <div>
+                    Thanks you.
+                    </div>
+            }
         </div>);
     }
 }
 
 function mapStateToProps(state) {
-    const { loggingIn, user } = state.loginReducer;
+    const { user } = state.loginReducer;
     return {
-        loggingIn,
         user
     };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(Buy);
-export { connectedLoginPage as Buy }; 
+const connectedBuy = connect(mapStateToProps)(Buy);
+export { connectedBuy as Buy }; 

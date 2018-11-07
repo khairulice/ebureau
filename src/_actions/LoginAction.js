@@ -1,6 +1,7 @@
 import { loginConstants } from '../_constants';
 import { loginService } from '../_services';
 import { history } from '../_common';
+import { alertActions } from '../_actions'
 
 export const loginActions = {
     login,
@@ -9,19 +10,23 @@ export const loginActions = {
 };
 
 function login(email, password) {
+
     return dispatch => {
         dispatch(request({ email }));
-
+        console.log(email);
         loginService.login(email, password)
             .then(
-                user => { 
+                user => {
+                    console.log('Login passed');
                     dispatch(success(user));
                     history.push('/');
-                    console.log('Login success');
+
                 },
                 error => {
+                    console.log('Login failed');
                     dispatch(failure(error));
-                    //dispatch(alertActions.error(error));
+                    dispatch(alertActions.error(error));
+
                 }
             );
     };
@@ -32,11 +37,10 @@ function login(email, password) {
 }
 
 function logout() {
-    loginService.logout();      
+    loginService.logout();
     return { type: loginConstants.LOGOUT };
 
 }
-
 
 function signup(email, password) {
     return dispatch => {
@@ -44,7 +48,7 @@ function signup(email, password) {
 
         loginService.signup(email, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
                     history.push('/');
                     console.log('Signup success');

@@ -29,6 +29,7 @@ export default class Login extends Component {
         this.setState({ submitted: true });
         const { email, password } = this.state;
         const { dispatch } = this.props;
+        console.log( email);
         if (email && password) {
             dispatch(loginActions.login(email, password));
         }

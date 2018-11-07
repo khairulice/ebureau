@@ -9,24 +9,13 @@ export const loginService = {
 
 
 function login(username, password) {
+    return firebase.auth().signInWithEmailAndPassword(username, password);
 
-    var promise1 = new Promise(function (resolve, reject) {
-        firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {           
-            return reject(error.message);
-        });
-
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {               
-                localStorage.setItem('user', JSON.stringify(user));
-                return resolve({email:user.email});
-                // ...
-            } else {
-                // User is signed out.
-                // ...
-            }
-        });
-    });
-    return promise1
+    // firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
+    //     console.log(error.message);
+    //     return Promise.reject(error.message);
+    // });
+    // return Promise.resolve({user:username})
 }
 
 function logout() {
@@ -38,16 +27,16 @@ function signup(email, password) {
 
     var promise1 = new Promise(function (resolve, reject) {
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(user=>{
-        resolve({email:email});
-    })
-    .catch(function (error) {       
-        return reject(error.message);
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(user => {
+                resolve({ email: email });
+            })
+            .catch(function (error) {
+                return reject(error.message);
+            });
+
     });
 
-});
-       
     return promise1
 }
 

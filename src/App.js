@@ -9,37 +9,37 @@ import { Home } from "./home";
 import { Login } from './login';
 import { Signup } from './signup';
 import Buy from './Buy';
-import { PublicRoute,ProtectedRoute } from "./_common";
+import { PublicRoute, ProtectedRoute } from "./_common";
 import { Service } from "./service";
-import {GuestRequest, Guest} from "./guest";
+import { GuestRequest, Guest } from "./guest";
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { loginActions } from "./_actions";
 
 class App extends Component {
   constructor(props) {
-    super(props);       
-
+    super(props);
+    const { dispatch } = this.props;    
     firebase.initializeApp(Config);
   }
 
   render() {
     const { alert } = this.props;
     return (
-      <div>        
+      <div>
         {alert.message &&
-                            <div className={`alert ${alert.type}`}>{alert.message}</div>
-                        }
+          <div className={`alert ${alert.type}`}>{alert.message}</div>
+        }
         <Router history={history}>
-          <div>  
+          <div>
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/signup" component={Signup} />
-            <PublicRoute exact path="/" component={Home} />  
-                                  
+            <PublicRoute exact path="/" component={Home} />
+
             <ProtectedRoute path="/buy" component={Buy} />
-            <ProtectedRoute path="/request" component={GuestRequest} />            
+            <ProtectedRoute path="/request" component={GuestRequest} />
             <ProtectedRoute path="/guest" component={Guest} />
           </div>
-        </Router>      
+        </Router>
 
       </div>
     );
