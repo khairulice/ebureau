@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.add-product{
+  margin: 20px;
+}
+
+.home-banner{
+  background-color: rgb(43, 46, 49);
+  font-size: 24px;
+  color: white;
+  text-align: center;  
+  vertical-align: bottom;
+  min-height: 500px;
+}
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+.topmargin{
+  margin-top: 20px;
+}
+
+.margin2px{
+  margin: 2px;
+}
+.conent-height{
+  min-height: 700px;
+}
+.welcome{
+color: green;
+font-weight: bold;
+}
+.text-center{
+  text-align: center;
+}
+.clearfx{
+  clear: both;
+}
+.service{  
+  margin: 10px;
+  font-size: 24px;
+}
+.action-holder{
+  float: right;
+}
+.title1{
+  font-size: 24px;
+  font-weight: bolder;
+  color: white;
+  margin: 20px 0;
+}
+.list-group-item{
+  background-color:rgb(253, 224, 108);
+  margin-top: 5px;
+  font-weight: bold;
+  color:red;
+}
+.serving{
+  background-color: rgb(12, 161, 241);
+  color: white;
+  font-size:large;
+}
+.completed{
+  background-color:rgb(77, 117, 77);
+  margin-top: 5px;
+  font-weight: normal;
+  color:rgb(12, 2, 2);  
+}
+.time{
+  font-size: 10px;
+  color: black;
+  font-weight: normal;
+  font-style: italic;
+}
+.navbar{
+background-color:rgb(49, 36, 30);
+}
+.navbar-collapse .collapse{
+  color: white;
+}
+.badge{
+  color: greenyellow;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.stats{
+  color: white;
+  font-weight: bold;
+}
