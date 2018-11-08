@@ -10,12 +10,23 @@ export const loginService = {
 
 function login(username, password) {
     return firebase.auth().signInWithEmailAndPassword(username, password);
-
-    // firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
-    //     console.log(error.message);
-    //     return Promise.reject(error.message);
-    // });
-    // return Promise.resolve({user:username})
+//     let promise = new Promise(function(resolve,reject){
+//     firebase.auth().signInWithEmailAndPassword(username, password)
+//     .then(resolve =>{
+//         console.log(resolve);
+//         return resolve(resolve);
+//     },
+//     error =>{
+//         console.log(error.message);
+//         return reject(error.message);
+//     })        
+//     .catch(function (error) {
+//         console.log(error.message);
+//         return reject(error.message);
+//     });  
+    
+//     return promise;
+// });
 }
 
 function logout() {

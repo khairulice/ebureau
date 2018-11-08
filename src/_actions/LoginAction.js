@@ -2,6 +2,7 @@ import { loginConstants } from '../_constants';
 import { loginService } from '../_services';
 import { history } from '../_common';
 import { alertActions } from '../_actions'
+import firebase from "firebase";
 
 export const loginActions = {
     login,
@@ -12,23 +13,37 @@ export const loginActions = {
 function login(email, password) {
 
     return dispatch => {
-        dispatch(request({ email }));
-        console.log(email);
+        dispatch(request({ email }));           
         loginService.login(email, password)
-            .then(
-                user => {
-                    console.log('Login passed');
-                    dispatch(success(user));
-                    history.push('/');
+        .then(resolve =>{
+            console.log(resolve);
+            dispatch(success(email));
+            history.push('/');
+        },
+        error =>{
+            console.log(error.message);
+            dispatch(failure(error.message));
+            dispatch(alertActions.error(error.message));
+        })    
+        .catch(function (error) {
+            console.log(error.message);
+            dispatch(failure(error.message));
+            dispatch(alertActions.error(error.message));
+        });    
 
-                },
-                error => {
-                    console.log('Login failed');
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+        // loginService.login(email, password)
+        //     .then(
+        //         user => {                   
+        //             dispatch(success(user));
+        //             history.push('/');
 
-                }
-            );
+        //         },
+        //         error => {                    
+        //             dispatch(failure(error));
+        //             dispatch(alertActions.error(error));
+
+        //         }
+        //     );
     };
 
     function request(user) { return { type: loginConstants.LOGIN_REQUEST, user } }

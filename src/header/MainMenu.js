@@ -12,6 +12,7 @@ class MainMenu extends React.Component {
 
     render() {
         const { loggedIn, user, wallet } = this.props;
+        const { alert } = this.props;
 
         return (<section className="navbar custom-navbar navbar-fixed-top" role="navigation">
             <div className="container">
@@ -48,18 +49,20 @@ class MainMenu extends React.Component {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>            
         </section>)
     }
 }
 
 
 function mapStateToProps(state) {
+    const { alert } = state;
     const { loggedIn, user, wallet } = state.loginReducer;
     return {
         loggedIn,
         user,
-        wallet
+        wallet,
+        alert
     };
 }
 

@@ -25,12 +25,9 @@ class App extends Component {
   render() {
     const { alert } = this.props;
     return (
-      <div>
-        {alert.message &&
-          <div className={`alert ${alert.type}`}>{alert.message}</div>
-        }
+      <div>       
         <Router history={history}>
-          <div>
+          <div>          
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/signup" component={Signup} />
             <PublicRoute exact path="/" component={Home} />
