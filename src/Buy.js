@@ -35,18 +35,18 @@ export default class Buy extends Component {
     handleChange = event => {
         console.log(this.state.selectedCurrency);
         let item = this.state.currencyies.filter(item => item.code === this.state.selectedCurrency)[0];
-        
+
         if (item) {
             this.setState({
                 [event.target.id]: event.target.value,
-                conversion: event.target.value * item.mid
+                conversion: (event.target.value * item.mid).toFixed(2)
             });
         }
     }
 
     onCurrencySelect(e) {
         let item = this.state.currencyies.filter(item => item.currency === this.inputEl.value)[0];
-        this.setState(prevState => ({ ...prevState, conversion: this.state.amount * item.mid }));
+        this.setState(prevState => ({ ...prevState, conversion: (this.state.amount * item.mid).toFixed(2) }));
         this.setState({ selectedCurrency: item.code });
 
     }
@@ -105,7 +105,7 @@ export default class Buy extends Component {
                             controlId="amount">
                             <ControlLabel>Amount</ControlLabel>
                             <FormControl
-                                type="text"
+                                type="number"
                                 value={this.state.value}
                                 placeholder="Enter amount"
                                 onChange={this.handleChange}
@@ -140,8 +140,11 @@ export default class Buy extends Component {
             </form>
             {this.state.acknowledge &&
                 <div>
-                    Thanks you.
+                    <div className="title1">Review</div>
+                    <div>
+                        Thanks you.
                     </div>
+                </div>
             }
         </div>);
     }
