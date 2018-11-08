@@ -47,6 +47,7 @@
     "react-bootstrap": "^0.32.4",
     "react-dev-utils": "^6.0.5",
     "react-dom": "^16.5.2",
+    "react-html5-form": "^1.0.9",
     "react-redux": "^5.1.0",
     "react-redux-toastr": "^7.4.1",
     "react-router-dom": "^4.3.1",

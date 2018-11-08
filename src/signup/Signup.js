@@ -3,7 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel, Jumbotron } from "react-b
 import { connect } from 'react-redux';
 import { loginActions } from '../_actions';
 
-export default class Signup extends Component {
+ class Signup extends Component {
     constructor(props) {
         super(props);
 
