@@ -80,10 +80,14 @@ font-weight: bold;
 .action-holder{
   float: right;
 }
+.container{
+  color: rgb(43, 61, 41);
+  font-weight: bold;
+  font-size: 16px;
+}
 .title1{
   font-size: 24px;
-  font-weight: bolder;
-  color: white;
+  font-weight: bolder;  
   margin: 20px 0;
 }
 .list-group-item{
@@ -123,4 +127,10 @@ background-color:rgb(49, 36, 30);
 .stats{
   color: white;
   font-weight: bold;
+}
+.left{
+  float: left;
+}
+.right{
+  float: right;
 }

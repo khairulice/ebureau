@@ -6,7 +6,7 @@ import en from 'javascript-time-ago/locale/en';
 import { toastr } from 'react-redux-toastr'
 import { guestService } from '../_services';
 
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +45,7 @@ export default class Home extends Component {
     }
 
     render() {
-        const { loggedIn } = this.props;
+        const { loggedIn, user } = this.props;
         let list = this.state.services.map(p => {
             return (
                 <li key={p.key} data-id={p.Name} onClick={this.handleGuestRequest.bind(this)} className="list-group-item active">
@@ -85,19 +85,12 @@ export default class Home extends Component {
                 </section>
                 : <div>
                     <div className="col-md-6 col-sm-12">
-                        <div className="title1"> Quick Service</div>
-                        <ul className="list-group service">
-                            {list}
-                            <li className="list-group-item active">
-                                Other
-                                    </li>
-                        </ul>
-                    </div>
-                    <div className="col-md-6 col-sm-12">
-                        <div className="title1">Message</div>
-                        <ul className="list-group">
-                            {messages}
-                        </ul>
+                    <div>
+                        Thank you  {user.email}
+                        </div>
+                        <div>
+                        Buy and Sell currency
+                        </div>
                     </div>
                 </div>
         )

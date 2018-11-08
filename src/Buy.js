@@ -5,7 +5,7 @@ import { loginActions } from './_actions';
 import firebase from "firebase";
 import axios from "axios";
 
-export default class Buy extends Component {
+class Buy extends Component {
     constructor(props) {
         super(props);
 
@@ -45,7 +45,7 @@ export default class Buy extends Component {
     }
 
     onCurrencySelect(e) {
-        let item = this.state.currencyies.filter(item => item.currency === this.inputEl.value)[0];
+        let item = this.state.currencyies.filter(item => item.code === this.inputEl.value)[0];
         this.setState(prevState => ({ ...prevState, conversion: (this.state.amount * item.mid).toFixed(2) }));
         this.setState({ selectedCurrency: item.code });
 
@@ -54,6 +54,10 @@ export default class Buy extends Component {
     handleProceed = event => {
         event.preventDefault();
         this.setState({ proceed: false, review: true });
+    }
+    handleEdit = event => {
+        event.preventDefault();
+        this.setState({ proceed: true, review: false });
     }
 
     handleSubmit = event => {
@@ -68,11 +72,11 @@ export default class Buy extends Component {
             fb.push({
                 currency_code: selectedCurrency,
                 amount: -amount,
-                client_id: 'khairulice@gmail.com',
+                client_id: user.email,
                 dt_created: dt.toString()
             });
 
-            let fbc = firebase.database().ref('ClientTransaction');
+            let fbc = firebase.database().ref('TradeTransaction');
             fbc.push({
                 currency_code: selectedCurrency,
                 amount: amount,
@@ -85,7 +89,7 @@ export default class Buy extends Component {
     render() {
 
         let options = this.state.currencyies.map(c => {
-            return <option key={c.key} value={c.currency}>{c.code}</option>
+            return <option key={c.key} value={c.code}>{c.currency}</option>
         });
 
         return (<div className="col-md-4 col-sm-12">
@@ -95,9 +99,9 @@ export default class Buy extends Component {
                         <div className="title1">Buy currency</div>
                         <FormGroup controlId="selectedCurrency">
                             <ControlLabel>Select currency</ControlLabel>
-                            <FormControl componentClass="select" placeholder="select" onChange={this.onCurrencySelect.bind(this)}
+                            <FormControl componentClass="select" value={this.state.selectedCurrency} placeholder="select" onChange={this.onCurrencySelect.bind(this)}
                                 inputRef={el => this.inputEl = el}>
-                                <option value="select" >select</option>
+                                <option value="select">select</option>
                                 {options}
                             </FormControl>
                         </FormGroup>
@@ -106,7 +110,7 @@ export default class Buy extends Component {
                             <ControlLabel>Amount</ControlLabel>
                             <FormControl
                                 type="number"
-                                value={this.state.value}
+                                value={this.state.amount}
                                 placeholder="Enter amount"
                                 onChange={this.handleChange}
                             />
@@ -115,7 +119,7 @@ export default class Buy extends Component {
                         <Button
                             block
                             bsSize="large"
-                            className="primary"
+                            bsStyle="primary"
                             disabled={!this.validateForm()}
                             onClick={this.handleProceed}
                             type="submit">
@@ -128,13 +132,21 @@ export default class Buy extends Component {
                         <div className="title1">Review</div>
                         <div>Currency: {this.state.selectedCurrency}</div>
                         <div>Amount: {this.state.amount}</div>
+                        <div className="topmargin">
                         <Button
-                            block
                             bsSize="large"
-                            className="primary"
+                            bsStyle="primary left"
+                            onClick={this.handleEdit}
+                            type="submit">
+                            Edit
+                        </Button>
+                        <Button                        
+                            bsSize="large"
+                            bsStyle="success right"
                             type="submit">
                             Buy
                         </Button>
+                        </div>
                     </div>
                 }
             </form>

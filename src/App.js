@@ -8,7 +8,7 @@ import { history } from './_common';
 import { Home } from "./home";
 import { Login } from './login';
 import { Signup } from './signup';
-import Buy from './Buy';
+import { Buy } from './Buy';
 import { PublicRoute, ProtectedRoute } from "./_common";
 import { Service } from "./service";
 import { GuestRequest, Guest } from "./guest";
@@ -37,7 +37,7 @@ class App extends Component {
         <MainMenu />
         <section data-stellar-background-ratio="0.5" className="conent-height">
           <div className="container">
-            <div className="overlay"></div>
+            {/* <div className="overlay"></div> */}
             <div className="row">
               <div className="col-md-offset-3 col-md-8 col-sm-12 topmargin">
                 {alert.message &&
