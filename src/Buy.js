@@ -140,7 +140,7 @@ export default class Buy extends Component {
             </form>
             {this.state.acknowledge &&
                 <div>
-                    <div className="title1">Review</div>
+                    <div className="title1">Complete</div>
                     <div>
                         Thanks you.
                     </div>
