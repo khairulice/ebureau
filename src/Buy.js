@@ -70,10 +70,11 @@ export default class Buy extends Component {
             return <option key={c.key} value={c.name}>{c.name}</option>
         });
 
-        return (<div className="col-md-offset-4 col-md-3 col-sm-12 topmargin">
+        return (<div className="col-md-4 col-sm-12">           
             <form onSubmit={this.handleSubmit}>
                 {this.state.proceed &&
                     <span>
+                         <div  className="title1">Buy currency</div>
                         <FormGroup controlId="selectedCurrency">
                             <ControlLabel>Select currency</ControlLabel>
                             <FormControl componentClass="select" placeholder="select" onChange={this.onCurrencySelect.bind(this)}
@@ -106,6 +107,7 @@ export default class Buy extends Component {
                 }
                 {this.state.review &&
                     <div>
+                         <div className="title1">Review</div>
                         <div>Currency: {this.state.selectedCurrency}</div>
                         <div>Amount: {this.state.amount}</div>
                         <Button

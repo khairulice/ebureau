@@ -13,31 +13,51 @@ import { PublicRoute, ProtectedRoute } from "./_common";
 import { Service } from "./service";
 import { GuestRequest, Guest } from "./guest";
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
-import { loginActions } from "./_actions";
+import { alertActions } from "./_actions";
+import { MainMenu } from "./header";
+import { Footer } from "./footer";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    const { dispatch } = this.props;    
+
+    const { dispatch } = this.props;
+    history.listen((location, action) => {
+      // clear alert on location change
+      dispatch(alertActions.clear());
+    });
+
     firebase.initializeApp(Config);
   }
 
   render() {
     const { alert } = this.props;
     return (
-      <div>       
-        <Router history={history}>
-          <div>          
-            <PublicRoute path="/login" component={Login} />
-            <PublicRoute path="/signup" component={Signup} />
-            <PublicRoute exact path="/" component={Home} />
-
-            <ProtectedRoute path="/buy" component={Buy} />
-            <ProtectedRoute path="/request" component={GuestRequest} />
-            <ProtectedRoute path="/guest" component={Guest} />
+      <div>
+        <MainMenu />
+        <section data-stellar-background-ratio="0.5" className="conent-height">
+          <div className="container">
+            <div className="overlay"></div>
+            <div className="row">
+              <div className="col-md-offset-3 col-md-8 col-sm-12 topmargin">
+                {alert.message &&
+                  <div className={`alert ${alert.type}`}>{alert.message}</div>
+                }
+                <Router history={history}>
+                  <div>
+                    <PublicRoute path="/login" component={Login} />
+                    <PublicRoute path="/signup" component={Signup} />
+                    <PublicRoute exact path="/" component={Home} />
+                    <ProtectedRoute path="/buy" component={Buy} />
+                    <ProtectedRoute path="/request" component={GuestRequest} />
+                    <ProtectedRoute path="/guest" component={Guest} />
+                  </div>
+                </Router>
+              </div>
+            </div>
           </div>
-        </Router>
-
+        </section>
+        <Footer />
       </div>
     );
   }

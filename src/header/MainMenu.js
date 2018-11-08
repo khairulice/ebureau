@@ -11,9 +11,7 @@ class MainMenu extends React.Component {
     }
 
     render() {
-        const { loggedIn, user, wallet } = this.props;
-        const { alert } = this.props;
-
+        const { loggedIn, user, wallet } = this.props;         
         return (<section className="navbar custom-navbar navbar-fixed-top" role="navigation">
             <div className="container">
                 <div className="navbar-header">
@@ -49,7 +47,7 @@ class MainMenu extends React.Component {
                         </li>
                     </ul>
                 </div>
-            </div>            
+            </div>
         </section>)
     }
 }

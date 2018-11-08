@@ -5,7 +5,7 @@ import { loginActions } from '../_actions';
 
 export default class Login extends Component {
     constructor(props) {
-        super(props);        
+        super(props);
 
         // reset login status
         this.props.dispatch(loginActions.logout());
@@ -29,47 +29,45 @@ export default class Login extends Component {
         this.setState({ submitted: true });
         const { email, password } = this.state;
         const { dispatch } = this.props;
-        console.log( email);
+        console.log(email);
         if (email && password) {
             dispatch(loginActions.login(email, password));
         }
     }
 
     render() {
-
         return (
-            <div className="container topmargin">
-                <div className="row">
-                    <div className="col-md-offset-4 col-md-3 col-sm-12">
-                        <form onSubmit={this.handleSubmit}>
-                            <FormGroup controlId="email" bsSize="small">
-                                <ControlLabel>
-                                    Email
+            <div>
+                <div className="col-md-6 col-sm-12">
+                    <div className="title1">Login</div>
+                    <form onSubmit={this.handleSubmit}>
+                        <FormGroup controlId="email" bsSize="small">
+                            <ControlLabel>
+                                Email
                     </ControlLabel>
-                                <FormControl
-                                    autoFocus
-                                    type="email"
-                                    value={this.state.email}
-                                    onChange={this.handleChange} />
-                            </FormGroup>
-                            <FormGroup controlId="password" bsSize="small">
-                                <ControlLabel>Password</ControlLabel>
-                                <FormControl
-                                    value={this.state.password}
-                                    onChange={this.handleChange}
-                                    type="password"
-                                />
-                            </FormGroup>
-                            <Button
-                                block
-                                bsSize="large"
-                                bsStyle="primary"
-                                disabled={!this.validateForm()}
-                                type="submit">
-                                Login
+                            <FormControl
+                                autoFocus
+                                type="email"
+                                value={this.state.email}
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup controlId="password" bsSize="small">
+                            <ControlLabel>Password</ControlLabel>
+                            <FormControl
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                                type="password"
+                            />
+                        </FormGroup>
+                        <Button
+                            block
+                            bsSize="large"
+                            bsStyle="primary"
+                            disabled={!this.validateForm()}
+                            type="submit">
+                            Login
           </Button>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         );

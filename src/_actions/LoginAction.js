@@ -17,7 +17,8 @@ function login(email, password) {
         loginService.login(email, password)
         .then(resolve =>{
             console.log(resolve);
-            dispatch(success(email));
+            dispatch(success({email}));
+            localStorage.setItem('user', JSON.stringify({email}));
             history.push('/');
         },
         error =>{
