@@ -16,7 +16,7 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { alertActions } from "./_actions";
 import { MainMenu } from "./header";
 import { Footer } from "./footer";
-import MyForm from './Profile';
+import Profile from './Profile';
 
 class App extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class App extends Component {
                     <PublicRoute exact path="/" component={Home} />
                     <ProtectedRoute path="/buy" component={Buy} />
                     <ProtectedRoute path="/request" component={GuestRequest} />
-                    <ProtectedRoute path="/profile" component={MyForm} />
+                    <ProtectedRoute path="/profile" component={Profile} />
                   </div>
                 </Router>
               </div>
