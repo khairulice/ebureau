@@ -3,7 +3,7 @@ const Config = {
   authDomain: "e-bureau.firebaseapp.com",
   databaseURL: "https://e-bureau.firebaseio.com",
   projectId: "e-bureau",
-  storageBucket: "",
+  storageBucket: "e-bureau.appspot.com",
   messagingSenderId: "812948762545"
 };
 

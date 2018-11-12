@@ -134,3 +134,7 @@ background-color:rgb(49, 36, 30);
 .right{
   float: right;
 }
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}

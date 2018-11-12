@@ -5,6 +5,7 @@ import { Form, InputGroup } from "react-html5-form";
 const XHR_TIMEOUT = 1000;
 
 async function onSubmit(form) {
+  console.log('form');
   try {
     let rsp = await fetch(`server-response.json`).then(rsp => rsp.json());
     if (!rsp.ok) {

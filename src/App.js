@@ -16,7 +16,8 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import { alertActions } from "./_actions";
 import { MainMenu } from "./header";
 import { Footer } from "./footer";
-import Profile from './Profile';
+import {Profile} from './Profile';
+import MyForm from './sample';
 
 class App extends Component {
   constructor(props) {
